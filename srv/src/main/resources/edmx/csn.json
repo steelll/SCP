@@ -1,0 +1,276 @@
+{
+  "definitions": {
+    "CatalogService": {
+      "@source": "srv/cat-service.cds",
+      "kind": "service"
+    },
+    "CatalogService.Books": {
+      "kind": "entity",
+      "@readonly": true,
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.bookshop.Books"
+            ]
+          }
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "title": {
+          "type": "cds.String"
+        },
+        "stock": {
+          "type": "cds.Integer"
+        }
+      },
+      "$syntax": "projection",
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false
+    },
+    "EmployeeService": {
+      "@source": "srv/sample-service.cds",
+      "kind": "service"
+    },
+    "EmployeeService.DeptEmp": {
+      "kind": "entity",
+      "query": {
+        "SELECT": {
+          "from": {
+            "join": "left",
+            "args": [
+              {
+                "ref": [
+                  "my.Dept"
+                ]
+              },
+              {
+                "ref": [
+                  "my.Employee"
+                ]
+              }
+            ],
+            "on": [
+              {
+                "ref": [
+                  "Dept",
+                  "ID"
+                ]
+              },
+              "=",
+              {
+                "ref": [
+                  "Employee",
+                  "DEPT_ID"
+                ]
+              }
+            ]
+          },
+          "columns": [
+            {
+              "ref": [
+                "Dept",
+                "ID"
+              ]
+            },
+            {
+              "ref": [
+                "Dept",
+                "NAME"
+              ]
+            },
+            {
+              "ref": [
+                "Dept",
+                "CREATE_DATE"
+              ]
+            },
+            {
+              "ref": [
+                "Employee",
+                "ID"
+              ],
+              "as": "emp_id"
+            },
+            {
+              "ref": [
+                "Employee",
+                "NAME"
+              ],
+              "as": "emp_name"
+            },
+            {
+              "ref": [
+                "Employee",
+                "SALARY"
+              ]
+            }
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "type": "cds.Integer"
+        },
+        "NAME": {
+          "type": "cds.String"
+        },
+        "CREATE_DATE": {
+          "type": "cds.Date"
+        },
+        "emp_id": {
+          "type": "cds.Integer"
+        },
+        "emp_name": {
+          "type": "cds.String"
+        },
+        "SALARY": {
+          "type": "cds.Integer"
+        }
+      },
+      "$syntax": "entity"
+    },
+    "EmployeeService.Employee": {
+      "kind": "entity",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "my.Employee"
+            ]
+          },
+          "columns": [
+            "*"
+          ]
+        }
+      },
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "NAME": {
+          "type": "cds.String"
+        },
+        "SALARY": {
+          "type": "cds.Integer"
+        },
+        "DEPT_ID": {
+          "type": "cds.Integer"
+        },
+        "depts": {
+          "type": "cds.Association",
+          "target": "my.Dept",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "depts_ID"
+            }
+          ]
+        },
+        "depts_ID": {
+          "type": "cds.Integer",
+          "@odata.foreignKey4": "depts"
+        }
+      },
+      "$syntax": "entity"
+    },
+    "my.Dept": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "NAME": {
+          "type": "cds.String"
+        },
+        "CREATE_DATE": {
+          "type": "cds.Date"
+        },
+        "employee": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "my.Employee",
+          "on": [
+            {
+              "ref": [
+                "employee",
+                "depts"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "my.Employee": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "NAME": {
+          "type": "cds.String"
+        },
+        "SALARY": {
+          "type": "cds.Integer"
+        },
+        "DEPT_ID": {
+          "type": "cds.Integer"
+        },
+        "depts": {
+          "type": "cds.Association",
+          "target": "my.Dept",
+          "keys": [
+            {
+              "ref": [
+                "ID"
+              ],
+              "$generatedFieldName": "depts_ID"
+            }
+          ]
+        },
+        "depts_ID": {
+          "type": "cds.Integer",
+          "@odata.foreignKey4": "depts"
+        }
+      }
+    },
+    "my.bookshop.Books": {
+      "kind": "entity",
+      "elements": {
+        "ID": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "title": {
+          "type": "cds.String"
+        },
+        "stock": {
+          "type": "cds.Integer"
+        }
+      }
+    }
+  },
+  "$version": "1.0",
+  "meta": {
+    "creator": "CDS Compiler v1.35.0"
+  },
+  "namespace": "my.bookshop"
+}

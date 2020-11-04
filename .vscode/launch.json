@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run steell1-1",
+      "type": "java",
+      "request": "launch",
+      "mainClass": "customer.steell1.Application",
+      "projectName": "steell1",
+      "preLaunchTask": "Build steell1",
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env1",
+      "env": {
+        "run.config": "{\"handlerId\":\"cap_run_config_handler_id\",\"runnableId\":\"{\\\"projectPath\\\":\\\"/home/user/projects/steell1\\\",\\\"profileName\\\":\\\"\\\"}\"}"
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:DataServices>
+    <Schema Namespace="EmployeeService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="DeptEmp" EntityType="EmployeeService.DeptEmp"/>
+        <EntitySet Name="Employee" EntityType="EmployeeService.Employee"/>
+      </EntityContainer>
+      <EntityType Name="DeptEmp">
+        <Property Name="ID" Type="Edm.Int32"/>
+        <Property Name="NAME" Type="Edm.String"/>
+        <Property Name="CREATE_DATE" Type="Edm.Date"/>
+        <Property Name="emp_id" Type="Edm.Int32"/>
+        <Property Name="emp_name" Type="Edm.String"/>
+        <Property Name="SALARY" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="Employee">
+        <Key>
+          <PropertyRef Name="ID"/>
+        </Key>
+        <Property Name="ID" Type="Edm.Int32" Nullable="false"/>
+        <Property Name="NAME" Type="Edm.String"/>
+        <Property Name="SALARY" Type="Edm.Int32"/>
+        <Property Name="DEPT_ID" Type="Edm.Int32"/>
+        <Property Name="depts_ID" Type="Edm.Int32"/>
+      </EntityType>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

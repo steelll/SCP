@@ -1,0 +1,17 @@
+db/src/gen/.hdiconfig
+db/src/gen/.hdinamespace
+db/src/gen/CatalogService.Books.hdbview
+db/src/gen/EmployeeService.DeptEmp.hdbview
+db/src/gen/EmployeeService.Employee.hdbview
+db/src/gen/data/my-Dept.csv
+db/src/gen/data/my-Dept.hdbtabledata
+db/src/gen/data/my-Employee.csv
+db/src/gen/data/my-Employee.hdbtabledata
+db/src/gen/data/my.bookshop-Books.csv
+db/src/gen/data/my.bookshop-Books.hdbtabledata
+db/src/gen/my.Dept.hdbtable
+db/src/gen/my.Employee.hdbtable
+db/src/gen/my.bookshop.Books.hdbtable
+srv/src/main/resources/edmx/CatalogService.xml
+srv/src/main/resources/edmx/EmployeeService.xml
+srv/src/main/resources/edmx/csn.json
